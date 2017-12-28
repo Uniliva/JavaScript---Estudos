@@ -35,6 +35,12 @@ class NegociacaoController {
         this._ivalor.value=0;
         this._idata.focus();
     }
+
+    apaga(){
+        this.lista.limpa();
+        this._dnegociacao.update(this.lista);
+        this._mensagem.update(new Mensagem("Negociações removidas com sucesso!"));
+    }
     
 
 

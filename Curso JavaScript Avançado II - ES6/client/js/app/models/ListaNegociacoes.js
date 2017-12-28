@@ -10,4 +10,8 @@ class ListaNegociacoes{
         //programação defenciva, so retorna um copia do dado
             return [].concat(this._Negociacoes);
     }
+
+    limpa(){
+        this._Negociacoes=[];
+    }
 }
