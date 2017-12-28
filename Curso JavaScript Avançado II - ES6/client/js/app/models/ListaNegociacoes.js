@@ -1,9 +1,12 @@
 class ListaNegociacoes{
-    constructor(){
+    //recebe um função que atualiza a view
+    constructor(fAtualiza){
         this._Negociacoes=[];
+        this._atualiza= fAtualiza
     }
     adiciona(Negociacao){
         this._Negociacoes.push(Negociacao);
+        this._atualiza(this);
     }
 
     get negociacoes(){
@@ -13,5 +16,6 @@ class ListaNegociacoes{
 
     limpa(){
         this._Negociacoes=[];
+        this._atualiza(this);
     }
 }
