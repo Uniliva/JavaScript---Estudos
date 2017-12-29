@@ -76,12 +76,12 @@
     </script>
     <script>
         let n = new Proxy(new Negociacao(new Date(), 2, 30), {
-
+            //Quando se acessa algum valor usa-se get
             get: function (target,prop,receiver) {
                 console.log(`A propiedade  ${prop} foi acessada` );
                 return Reflect.get(target,prop,receiver);
             },
-
+            //quando se altera algum valor usa-se set
             set: function(target,prop,value,reciver){
                 console.log(`Anterior:${target[prop]} -> Novo:${value}`);            }
         });
