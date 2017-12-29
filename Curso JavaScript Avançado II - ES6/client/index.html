@@ -15,7 +15,7 @@
     <hr>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-                <div id="msg"></div>
+            <div id="msg"></div>
             <form class="form" onsubmit="negociacaoController.adiciona(event)">
 
                 <div class="form-group">
@@ -34,11 +34,11 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit">Incluir</button>
-            </form>  
-            
-            
+            </form>
+
+
         </div>
-      
+
     </div>
 
 
@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="text-center">
-                <button class="btn btn-primary text-center"  type="button">
+                <button class="btn btn-primary text-center" type="button">
                     Importar Negociações
                 </button>
                 <button class="btn btn-primary text-center" onclick="negociacaoController.apaga()" type="button">
@@ -73,6 +73,25 @@
     <script src="js/app/views/MensagemView.js"></script>
     <script>
         let negociacaoController = new NegociacaoController();
+    </script>
+    <script>
+        let n = new Proxy(new Negociacao(new Date(), 2, 30), {
+
+            get: function (target,prop,receiver) {
+                console.log(`A propiedade  ${prop} foi acessada` );
+                return Reflect.get(target,prop,receiver);
+            },
+
+            set: function(target,prop,value,reciver){
+                console.log(`Anterior:${target[prop]} -> Novo:${value}`);            }
+        });
+
+        console.log(n.data);
+        console.log(n.quantidade);
+
+        console.log("Teste --------------------------------------|")
+            n._valor=255555;
+            n._quantidade=15;
     </script>
 </body>
 
