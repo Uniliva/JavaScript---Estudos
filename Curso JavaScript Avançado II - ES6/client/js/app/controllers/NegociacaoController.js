@@ -8,15 +8,15 @@ class NegociacaoController {
         this._iqtd = $("#quantidade")
         this._ivalor = $("#valor")
         this.lista = new Bind(new ListaNegociacoes(), new NegociacaoView($("#negociacaoView")), 'adiciona', 'limpa');
-        
-        this._mensagem = new Bind(new Mensagem(), new MensagemView($("#msg")),"texto");
-        
+
+        this._mensagem = new Bind(new Mensagem(), new MensagemView($("#msg")), "texto");
+
     }
     adiciona(event) {
-        event.preventDefault(); 
-       
+        event.preventDefault();
+
         this.lista.adiciona(this._criaNegociacao());
-        this._limpaForm();        
+        this._limpaForm();
         this._mensagem.texto = "Negociação Adicionada!";
     }
     _criaNegociacao() {
@@ -32,9 +32,25 @@ class NegociacaoController {
     }
 
     apaga() {
-       
-        this.lista.limpa(); 
+
+        this.lista.limpa();
         this._mensagem.texto = "Negociações removidas com sucesso!";
+    }
+
+    importaNegociacao() {
+        let service = new NegociacaoService();
+        service.obterNegociacaoSemana((erro,negociacao)=>{
+            if(erro){
+                this._mensagem.texto=erro;
+                return;
+            }
+
+            negociacao.forEach(n => {
+                this.lista.adiciona(n);  
+                this._mensagem.texto="Negociações importadas";              
+            });
+        });
+       
     }
 
 

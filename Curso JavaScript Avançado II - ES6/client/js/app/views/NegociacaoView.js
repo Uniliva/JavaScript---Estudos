@@ -18,7 +18,7 @@ class NegociacaoView extends View{
         ${
             listaNegociacao.negociacoes.map(n => `
                     <tr>
-                        <td>${DateHelper.dataParaTexto(n.data)}</td>
+                        <td>${DateHelper.dataParaTexto(new Date(n.data))}</td>
                         <td>${n.quantidade}</td>
                         <td>${n.valor}</td>
                         <td>${n.volume}</td>
