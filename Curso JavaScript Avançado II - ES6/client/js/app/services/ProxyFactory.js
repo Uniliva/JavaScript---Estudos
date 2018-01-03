@@ -5,7 +5,7 @@ class ProxyFactory {
                 ///;captura os metodos
                 get(target, prop, receiver) {
                     //filtra pela nome  do metodo e pelo tipo do metodo
-                    if (propriedade.includes(prop) && typeof (target[prop]) == typeof (Function)) {
+                    if (propriedade.includes(prop) && ProxyFactory._ehFuncao(target[prop])) {
                         return function () {
                             console.log(`O metodo "${prop}" foi interceptado`);
                             Reflect.apply(target[prop], target, arguments);
@@ -19,15 +19,21 @@ class ProxyFactory {
                 //captura os atributos
                 set(target,prop, value, receiver){
                     //filtra pela propiedade passada
-                   Reflect.set(target,prop, value, receiver);
+                  
                     if(propriedade.includes(prop)){
+                        target[prop]=value;
                          acao(target);
                     }
-                    
+                    return Reflect.set(target,prop, value, receiver);
                     
                     
                 }
             });
+    }
+    static _ehFuncao(func) {
+
+        return typeof(func) == typeof(Function);
+    
     }
 
 }

@@ -13,7 +13,7 @@ class NegociacaoController {
 
 
         this._mensagemView = new MensagemView($("#msg"))
-        this._mensagem = ProxyFactory.create(new Mensagem(), ["texto"], (model) => this._mensagemView.update(model.texto));
+        this._mensagem = ProxyFactory.create(new Mensagem(), ["texto"], (model) => this._mensagemView.update(model));
         this._mensagemView.update(this._mensagem);
     }
     adiciona(event) {
