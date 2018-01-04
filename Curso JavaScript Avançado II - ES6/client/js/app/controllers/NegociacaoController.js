@@ -41,25 +41,35 @@ class NegociacaoController {
 
 
         let service = new NegociacaoService();
+        //Promisse all permite que se parsse um conjuto de promisse e execute apenas um the e um catch
+        Promise.all([service.obterNegociacaoSemana(), service.obterNegociacaoSemanaAnterior(), service.obterNegociacaoSemanaRetrasada()])
+            .then(ConjuntoListaNegociacao => {
+                ConjuntoListaNegociacao.reduce((listaTotal, listaParcial) => listaTotal.concat(listaParcial))
+                    .forEach(negociacao => this.lista.adiciona(negociacao));
+                this._mensagem.texto = "Negociações importadas com sucesso!";
 
+            }).catch(erro => this._mensagem.texto = erro);
+
+        /*
+    
         service.obterNegociacaoSemana().then(lista => {
             lista.forEach(n => { this.lista.adiciona(n); });
             this._mensagem.texto = "Negociações da semana importadas com sucesso!";
         }).catch(erro => this._mensagem.texto = erro);
-
-
-
-
+    
+    
+    
+    
         service.obterNegociacaoSemanaAnterior().then(negociacao => {
             negociacao.forEach(n => { this.lista.adiciona(n); });
             his._mensagem.texto = "Negociações da semana Anterior importadas com sucesso!";
         }).catch(erro => this._mensagem.texto = erro);
-
+    
         service.obterNegociacaoSemanaRetrasada().then(negociacao => {
             negociacao.forEach(n => { this.lista.adiciona(n); });
             his._mensagem.texto = "Negociações da semana importadas com sucesso!";
         }).catch(erro => this._mensagem.texto = erro);
-
+    */
 
     }
 
