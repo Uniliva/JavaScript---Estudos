@@ -15,7 +15,6 @@ class NegociacaoService {
         })
     }
     obterNegociacaoSemanaAnterior() {
-
         return new Promise((resolve, reject) => {
             this._http.get('negociacoes/anterior').then(negociacao => {
                 resolve(negociacao.map(obj => new Negociacao(obj.data, obj.quantidade, obj.valor)))
@@ -27,7 +26,6 @@ class NegociacaoService {
         })
     }
     obterNegociacaoSemanaRetrasada() {
-
             return new Promise((resolve, reject) => {
                 this._http.get('negociacoes/retrasada').then(negociacao => {
                     resolve(negociacao.map(obj => new Negociacao(obj.data, obj.quantidade, obj.valor)))
